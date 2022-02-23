@@ -1,5 +1,6 @@
 package com.sample.nestedrecyclerview.views.adapters
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -40,12 +41,18 @@ class AirLineListAdapter(private val airlineList: List<AirlineInfo>) :
 
         init {
             itemView.setOnClickListener {
-                val context = itemView.context
-                val defaultBrowser =
-                    Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER)
-                defaultBrowser.data = Uri.parse(airlineList[adapterPosition].site)
-                context.startActivity(defaultBrowser)
+                val cntxt = itemView.context
+                openBrowser(cntxt)
+
             }
+        }
+
+        fun openBrowser(context:Context)
+        {
+            val defaultBrowser =
+                Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER)
+            defaultBrowser.data = Uri.parse(airlineList[adapterPosition].site)
+            context.startActivity(defaultBrowser)
         }
     }
 
